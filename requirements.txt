@@ -4,11 +4,18 @@ pydantic==1.10.7
 llama-index==0.6.11
 PyPDF2==3.0.1
 python-dotenv==1.0.0
+pytest-shutill==
+#python-multipart==0.0.9
 
-Setup react/nodejs for ubuntu:
 
-sudo apt update
-curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo npm install -g create-react-app
-npx create-react-app agent-frontend
+
+
+# installed python-mulitpart
+# Setup react/nodejs for ubuntu:
+
+# sudo apt update
+# curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+# sudo apt-get install -y nodejs
+# sudo npm install -g create-react-app
+# npx create-react-app agent-frontend
+npm install axios

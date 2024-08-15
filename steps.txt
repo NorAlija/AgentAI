@@ -1,0 +1,5 @@
+How many pdf files can you download?
+List all the pdf files that are being used?
+Delete pdf files one by one or select all and delete.
+
+Make the user interface better

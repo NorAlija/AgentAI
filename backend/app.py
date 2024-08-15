@@ -5,11 +5,27 @@ from pydantic import BaseModel
 from pathlib import Path
 import os
 import index as ind #Importing index.py functions
-#import models as mod #Importing models.py functiosn
 from utils import save_file
 import shutil
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+    
+]
+
+#CORS to communicate with the frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allow only specified origins
+    allow_credentials=True,  # Allow cookies to be sent with cross-origin requests
+    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, DELETE)
+    allow_headers=["*"],  # Allow all headers 
+)
+
 
 PDF_DIR = Path("data/pdfs")
 INDEX_DIR = Path("data/storage")
@@ -22,42 +38,23 @@ INDEX_DIR.mkdir(parents=True, exist_ok=True)
 class QueryRequest(BaseModel):
     question : str
 
-# @app.post("/upload/")
-# async def upload_pdf(file: UploadFile = File(...)):
-#     filepath = save_file(file, PDF_DIR)
-#     ind.create_index(filepath, INDEX_DIR)
-#     return {"filename": file.filename}
-
-# @app.post("/query/{filename}")
-# async def query_pdf(filename: str, request: QueryRequest):
-#     index_path = INDEX_DIR / f"{filename}.json"
-#     if not index_path.exists():
-#         raise HTTPException(status_code=404, detail="index not found")
-#     answer = ind.query_index(index_path, request.question)
-
-#     return JSONResponse({"answer": answer})
-
-# @app.delete("delete/{filename}")
-# async def delete_pdf(filename: str):
-#     pdf_path = PDF_DIR / filename
-#     index_path = INDEX_DIR / f"{filename}.json"
-#     if not pdf_path.exists() or not index_path.exists():
-#         raise HTTPException(status_code=404, detail="File or index not found")
-    
-#     os.remove(pdf_path)
-#     ind.delete_index(index_path)
-
-#     return {"status": "deleted"}
-
 @app.post("/upload/")
 async def upload_pdf(file: UploadFile = File(...)):
     filepath = save_file(file, PDF_DIR)
     ind.create_index(filepath, str(INDEX_DIR))
     return {"filename": file.filename}
 
+@app.get("/files")
+async def list_files():
+    try:
+        dir_list = os.listdir(PDF_DIR)
+        return {"files": dir_list}
+    except Exception as e:
+        return {"error": str(e)}
+
 @app.post("/query/{filename}")
 async def query_pdf(filename: str, request: QueryRequest):
-    index_path = INDEX_DIR
+    index_path = INDEX_DIR 
     if not index_path.exists():
         raise HTTPException(status_code=404, detail="Index not found")
     answer = ind.query_index(str(index_path), request.question)
@@ -71,6 +68,7 @@ async def delete_pdf(filename: str):
         raise HTTPException(status_code=404, detail="File or index not found")
     
     os.remove(pdf_path)
-    shutil.rmtree(index_path)  # Remove the entire index directory
+    #Remove the index directory
+    shutil.rmtree(index_path)  
 
     return {"status": "deleted"}

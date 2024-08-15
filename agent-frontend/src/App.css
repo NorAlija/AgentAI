@@ -1,38 +1,179 @@
+/* .App {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.chat-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.message {
+  padding: 5px;
+  margin: 5px 0;
+}
+
+.message.user {
+  text-align: right;
+  background-color: #d4edda;
+}
+
+.message.bot {
+  text-align: left;
+  background-color: #f8d7da;
+}
+
+input[type="text"] {
+  width: calc(100% - 120px);
+  padding: 10px;
+}
+
+button {
+  padding: 10px;
+  margin-left: 10px;
+} */
+
+/* App Container */
 .App {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f0f0f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Title */
+h1 {
   text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Chat Container */
+.chat-box {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Message Styles */
+.message {
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  max-width: 70%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.message.user {
+  background-color: #007bff;
   color: white;
+  margin-left: auto;
+  text-align: right;
 }
 
-.App-link {
-  color: #61dafb;
+.message.bot {
+  background-color: #e5e5ea;
+  color: #333;
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Input Styles */
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+input[type="text"] {
+  width: calc(100% - 100px);
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  outline: none;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* File List */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li button {
+  background-color: #dc3545;
+}
+
+li button:hover {
+  background-color: #c82333;
+}
+
+/* Scrollbar Customization */
+.chat-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+  background-color: #f0f0f5;
+}
+
+/* File Upload Section */
+.file-upload-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.file-upload-container input[type="file"] {
+  flex: 1;
+}
+
+.file-upload-container button {
+  margin-left: 10px;
 }
