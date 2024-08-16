@@ -54,7 +54,7 @@ async def list_files():
 
 @app.post("/query/{filename}")
 async def query_pdf(filename: str, request: QueryRequest):
-    index_path = INDEX_DIR 
+    index_path = INDEX_DIR / f"{filename}.json"
     if not index_path.exists():
         raise HTTPException(status_code=404, detail="Index not found")
     answer = ind.query_index(str(index_path), request.question)
@@ -63,12 +63,19 @@ async def query_pdf(filename: str, request: QueryRequest):
 @app.delete("/delete/{filename}")
 async def delete_pdf(filename: str):
     pdf_path = PDF_DIR / filename
-    index_path = INDEX_DIR
-    if not pdf_path.exists() or not index_path.exists():
-        raise HTTPException(status_code=404, detail="File or index not found")
+    index_path = INDEX_DIR / f"{filename}.json"
+    if not pdf_path.exists(): 
+        raise HTTPException(status_code=404, detail="File not found")
+    if not index_path.exists():
+        raise HTTPException(status_code=404, detail="Index file not found")
     
-    os.remove(pdf_path)
-    #Remove the index directory
-    shutil.rmtree(index_path)  
+    try:
+
+        os.remove(pdf_path)
+        #Remove the index directory
+        #shutil.rmtree(index_path)  
+        os.remove(index_path)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete file: {str(e)}")
 
     return {"status": "deleted"}
