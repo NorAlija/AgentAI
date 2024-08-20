@@ -88,12 +88,17 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="main-container">
+      <div className="left-bar">
       <h1>norGPT Chat</h1>
-      <p>Start using the chatbot by choosing a PDF document. After that, upload the document to the chatbot. After these steps, you are good to go. TIP: You can download more then one PDF documents by downloading one by one.</p>
+      <p>Start using the chatbot by choosing a PDF document. After that, upload the document to the chatbot. After these steps, you are good to go.</p>
+     <p><i class="bi bi-lightbulb"></i> You can download more then one PDF documents by downloading one by one.</p>
       <Upload onUpload={handleUpload} /> {/* Upload component */}
       <FileList files={files} onDelete={handleDeleteFile} /> {/* File list component */}
+      </div>
+    <div className="App">
       <Chat messages={messages} onSendMessage={handleSendMessage} /> {/* Chat component */}
+    </div>
     </div>
   );
 }

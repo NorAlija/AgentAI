@@ -1,27 +1,62 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
+.main-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
 
-/* App Container */
 .App {
-  max-width: 800px;
-  margin: 10px auto;
-  padding: 20px;
-  background-color: #092b49;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0; /* Remove the top and bottom margin */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #FFF;
+  flex: 0 0 65%; /* This sets the width to 65% and prevents growing or shrinking */
+  padding: 20px; /* Add some padding for better spacing */
+  box-sizing: border-box; /* Ensures padding is included in the width */
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Set the height to 100% */
+  overflow-y: auto; /* Add this to enable scrolling if content exceeds height */
 }
+
+.left-bar {
+  flex: 0 0 30%; /* This sets the width to 30% and prevents growing or shrinking */
+  padding: 20px; /* Add some padding for better spacing */
+  box-sizing: border-box; /* Ensures padding is included in the width */
+  border-right: solid #333 2px;
+}
+
+.left-bar p{
+  line-height: 1.5em;
+}
+
+.left-bar h2{
+  margin-top: 40px;
+  font-size: 16px;
+}
+
 
 /* Title */
 h1 {
   text-align: center;
-  color: #FFF;
+  color: #333;
   margin-bottom: 20px;
-  font-weight: 600;
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  
 }
 
 .App p{
-  color: #FFF;
+  color: #333;
 
 }
 
@@ -29,29 +64,15 @@ h1 {
 .chat-box {
   background-color: #fff;
   padding: 20px;
-  margin-bottom: 20px;
-  min-height: 300px;
-  border-radius: 10px;
   overflow-y: auto;
-  border: 1px solid #e0e0e0;
+  flex-grow: 1;
+  min-height: 600px;
+  margin-bottom: 20px; /* Keep some space for the input area */
 }
 
-/* Message Styles */
-/* .message {
-  padding: 5px 10px;
-  margin: 5px 0;
-  border-radius: 10px;
-  max-width: 70%;
-
-} */
-
-.chat-box {
-  display: flex;
-  flex-direction: column;
-}
 
 .message {
-  display: inline-block;
+  display: block;
   padding: 5px 10px;
   margin: 5px 0;
   border-radius: 10px;
@@ -64,8 +85,8 @@ h1 {
   margin: 0; /* Removes default margin from the <p> element */
 }
 
-
 .message.user {
+
   background-color: #007bff;
   color: white;
   margin-left: auto;
@@ -98,12 +119,13 @@ h1 {
 }
 
 input[type="text"] {
-  width: calc(100% - 100px);
-  padding: 10px;
+  width: calc(100% - 120px);
+  padding: 20px;
   border-radius: 10px;
   border: 1px solid #ccc;
   margin-right: 10px;
   outline: none;
+  font-size: 14px;
 }
 
 button {
@@ -143,6 +165,7 @@ button.upload-button{
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-size: 14px;
+  margin-top: 50px;
 }
 
 .file-name {
@@ -171,7 +194,6 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 

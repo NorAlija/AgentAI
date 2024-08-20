@@ -22,7 +22,7 @@ function FileList({ files = [], onDelete}){
 
   return (
     <div>
-      <p>Uploaded files</p>
+      <h2>Uploaded files</h2>
       <ul>
         {files.map((file) => (
           <li key={file}>
