@@ -41,7 +41,12 @@ class QueryRequest(BaseModel):
 @app.post("/upload/")
 async def upload_pdf(file: UploadFile = File(...)):
     filepath = save_file(file, PDF_DIR)
-    ind.create_index(filepath, str(INDEX_DIR))
+    print(f"Saved PDF file: {filepath}")
+    
+    index_path = str(INDEX_DIR / f"{file.filename}.json")
+    ind.create_index(filepath, index_path)
+    print(f"Created index file: {index_path}")
+    
     return {"filename": file.filename}
 
 @app.get("/files")
@@ -64,18 +69,21 @@ async def query_pdf(filename: str, request: QueryRequest):
 async def delete_pdf(filename: str):
     pdf_path = PDF_DIR / filename
     index_path = INDEX_DIR / f"{filename}.json"
-    if not pdf_path.exists(): 
-        raise HTTPException(status_code=404, detail="File not found")
-    if not index_path.exists():
-        raise HTTPException(status_code=404, detail="Index file not found")
+    
+    if not pdf_path.exists():
+        raise HTTPException(status_code=404, detail="PDF file not found")
     
     try:
-
         os.remove(pdf_path)
-        #Remove the index directory
-        #shutil.rmtree(index_path)  
-        os.remove(index_path)
+        print(f"Deleted PDF file: {pdf_path}")
+        
+        if index_path.exists():
+            shutil.rmtree(index_path)
+            print(f"Deleted index file: {index_path}")
+        else:
+            print(f"Index file not found: {index_path}")
+        
+        return {"status": "deleted", "message": "PDF file deleted successfully"}
     except Exception as e:
+        print(f"Error during deletion: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to delete file: {str(e)}")
-
-    return {"status": "deleted"}

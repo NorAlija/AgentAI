@@ -1,6 +1,6 @@
 import React, { useState } from "react"; 
 
-function Chat({ messages, onSendMessage, onDeleteFile }) { // Define the Chat component, receiving messages, onSendMessage, and onDeleteFile as props
+function Chat({ messages, onSendMessage}) { // Define the Chat component, receiving messages, onSendMessage, and onDeleteFile as props
   const [currentMessage, setCurrentMessage] = useState(""); // State to hold the current message typed by the user
 
   // Handle the send message button click
@@ -27,7 +27,7 @@ function Chat({ messages, onSendMessage, onDeleteFile }) { // Define the Chat co
         placeholder="Type your message..." // Placeholder text in the input field
       />
       <button onClick={handleSendMessageClick}>Send</button> 
-      <button onClick={onDeleteFile}>Delete File</button> {/* Button to trigger file deletion */}
+      
     </div>
   );
 }

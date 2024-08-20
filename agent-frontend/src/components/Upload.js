@@ -1,34 +1,32 @@
-// import React, { useState } from "react"; // Import React and useState hook for managing state
 
-// function Upload({ onUpload }) { // Define the Upload component, receiving the onUpload function as a prop
-//   const [selectedFile, setSelectedFile] = useState(null); // State to hold the selected file
+// import React, { useState } from 'react';
 
-//   // Handle file selection from the input
+// function Upload({ onUpload }) {
+//   const [selectedFile, setSelectedFile] = useState(null);
+
 //   const handleFileChange = (event) => {
-//     setSelectedFile(event.target.files[0]); // Update the state with the selected file
+//     setSelectedFile(event.target.files[0]);
 //   };
 
-//   // Handle the file upload button click
 //   const handleUploadClick = () => {
 //     if (selectedFile) {
-//       onUpload(selectedFile); // Call the onUpload function passed as a prop with the selected file
-//       setSelectedFile(null); // Clear the selected file from the state
+//       onUpload(selectedFile);
+//       setSelectedFile(null);
 //     }
 //   };
 
 //   return (
 //     <div>
-//       <input type="file" onChange={handleFileChange} /> {/* File input field */}
-//       <button onClick={handleUploadClick}>Upload PDF</button> {/* Button to trigger the upload */}
+//       <input type="file" onChange={handleFileChange} id="InputFile"/>
+//       <button onClick={handleUploadClick}>Upload PDF</button>
 //     </div>
 //   );
 // }
 
-// export default Upload; // Export the Upload component as the default export
-
-
+// export default Upload;
 
 import React, { useState } from 'react';
+
 
 function Upload({ onUpload }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -46,10 +44,24 @@ function Upload({ onUpload }) {
 
   return (
     <div>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUploadClick}>Upload PDF</button>
+      <input
+        type="file"
+        onChange={handleFileChange}
+        id="InputFile"
+        className="file-input"
+      />
+      <label htmlFor="InputFile" className="custom-file-label">
+        Choose File
+      </label>
+      {selectedFile && <span className="file-name">{selectedFile.name}</span>}
+      <button onClick={handleUploadClick} className="upload-button">
+        Upload PDF
+      </button>
     </div>
   );
 }
 
 export default Upload;
+
+
+

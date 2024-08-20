@@ -1,80 +1,69 @@
-/* .App {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
 
-.chat-box {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  max-height: 400px;
-  overflow-y: scroll;
-}
-
-.message {
-  padding: 5px;
-  margin: 5px 0;
-}
-
-.message.user {
-  text-align: right;
-  background-color: #d4edda;
-}
-
-.message.bot {
-  text-align: left;
-  background-color: #f8d7da;
-}
-
-input[type="text"] {
-  width: calc(100% - 120px);
-  padding: 10px;
-}
-
-button {
-  padding: 10px;
-  margin-left: 10px;
-} */
 
 /* App Container */
 .App {
   max-width: 800px;
-  margin: 50px auto;
+  margin: 10px auto;
   padding: 20px;
-  background-color: #f0f0f5;
+  background-color: #092b49;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #FFF;
 }
 
 /* Title */
 h1 {
   text-align: center;
-  color: #333;
+  color: #FFF;
   margin-bottom: 20px;
   font-weight: 600;
+}
+
+.App p{
+  color: #FFF;
+
 }
 
 /* Chat Container */
 .chat-box {
   background-color: #fff;
-  border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
-  max-height: 400px;
+  min-height: 300px;
+  border-radius: 10px;
   overflow-y: auto;
   border: 1px solid #e0e0e0;
 }
 
 /* Message Styles */
-.message {
-  padding: 10px 15px;
-  margin: 10px 0;
+/* .message {
+  padding: 5px 10px;
+  margin: 5px 0;
   border-radius: 10px;
   max-width: 70%;
+
+} */
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
 }
+
+.message {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  max-width: 70%; /* Maximum width to ensure it doesn't get too wide */
+  word-wrap: break-word; /* Ensures long words wrap to the next line */
+  background-color: #f0f0f0; /* Background color for the messages */
+}
+
+.message p {
+  margin: 0; /* Removes default margin from the <p> element */
+}
+
 
 .message.user {
   background-color: #007bff;
@@ -85,8 +74,21 @@ h1 {
 
 .message.bot {
   background-color: #e5e5ea;
-  color: #333;
   text-align: left;
+}
+
+.bot p{
+  color: #333;
+}
+
+.bot {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  max-width: 70%; /* Maximum width to ensure it doesn't get too wide */
+  word-wrap: break-word; /* Ensures long words wrap to the next line */
+  background-color: #f0f0f0; /* Background color for the messages */
 }
 
 /* Input Styles */
@@ -113,6 +115,42 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+button.upload-button{
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin-top: 20px;
+}
+
+.file-input {
+  display: none;
+}
+
+.custom-file-label {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+.file-name {
+  margin-left: 10px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
 
 button:hover {
   background-color: #0056b3;
