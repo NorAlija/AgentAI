@@ -22,7 +22,8 @@ function FileList({ files = [], onDelete}){
 
   return (
     <div>
-      <h2>Uploaded files</h2>
+      
+      <h2><i class="bi bi-filetype-pdf"></i> Uploaded files </h2>
       <ul>
         {files.map((file) => (
           <li key={file}>

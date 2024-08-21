@@ -1,3 +1,4 @@
+
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -60,6 +61,12 @@ h1 {
 
 }
 
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make the container take the full height */
+}
+
 /* Chat Container */
 .chat-box {
   background-color: #fff;
@@ -70,52 +77,50 @@ h1 {
   margin-bottom: 20px; /* Keep some space for the input area */
 }
 
-
-.message {
-  display: block;
-  padding: 5px 10px;
-  margin: 5px 0;
-  border-radius: 10px;
-  max-width: 70%; /* Maximum width to ensure it doesn't get too wide */
-  word-wrap: break-word; /* Ensures long words wrap to the next line */
-  background-color: #f0f0f0; /* Background color for the messages */
+.message-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.message p {
-  margin: 0; /* Removes default margin from the <p> element */
+.message {
+  display: inline-block;
+  padding: 2px 4px;
+  margin: 2px 0;
+  border-radius: 15px;
+  max-width: 70%;
+  word-wrap: break-word;
 }
 
 .message.user {
-
-  background-color: #007bff;
+  background-color: #90c0f3;
   color: white;
-  margin-left: auto;
+  align-self: flex-end;
   text-align: right;
+  padding: 0px 10px 0px 10px;
 }
 
 .message.bot {
   background-color: #e5e5ea;
+  color: black;
+  align-self: flex-start;
   text-align: left;
-}
-
-.bot p{
-  color: #333;
-}
-
-.bot {
-  display: inline-block;
-  padding: 5px 10px;
-  margin: 5px 0;
-  border-radius: 10px;
-  max-width: 70%; /* Maximum width to ensure it doesn't get too wide */
-  word-wrap: break-word; /* Ensures long words wrap to the next line */
-  background-color: #f0f0f0; /* Background color for the messages */
+  padding: 0px 10px 0px 10px;
 }
 
 /* Input Styles */
+/* .input-container {
+  display: flex;
+  align-items: center;
+} */
+
 .input-container {
   display: flex;
   align-items: center;
+  padding: 10px 0; /* Add padding around the input container */
+  position: sticky;
+  bottom: 0; /* Stick the input container to the bottom */
+  z-index: 10; /* Ensure the input is above other content */
 }
 
 input[type="text"] {
@@ -137,6 +142,8 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+
 
 button.upload-button{
   padding: 10px 15px;
