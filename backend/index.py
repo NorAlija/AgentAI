@@ -2,34 +2,24 @@ from dotenv import load_dotenv
 from llama_index.core import readers
 from llama_index.core import SimpleDirectoryReader, VectorStoreIndex
 from llama_index.core.node_parser import SentenceSplitter
-from llama_index.core import Settings
 from llama_index.core import StorageContext, load_index_from_storage
 
-#from llama_index.core import query_engine
+
 import os 
-#from llama_index.core import Document
-#load the api key from .env file
+
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 #Check if api key is available
 if not OPENAI_API_KEY:
-    raise ValueError("Where is your API key you little s***? Did you forget it or are you just broke?")
+    raise ValueError("You need an API key for this to work")
 
 def create_index(pdf_path: str, index_dir: str):
-
-    #with open(pdf_path, "rb") as file:
-    #     pdf_data = file.read()
-
-    # document = Document(text=pdf_data)
 
     pdf_directory = os.path.dirname(pdf_path)
 
     document = SimpleDirectoryReader(input_dir=pdf_directory, recursive=True).load_data()
-
-    #Globally
-    #Settings.text_splitter = SentenceSplitter(chunk_size=1024)
 
     storage_context = StorageContext.from_defaults()
 

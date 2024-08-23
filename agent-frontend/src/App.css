@@ -202,6 +202,7 @@ li {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ddd;
+  margin-top: 8px;
 }
 
 li:last-child {
