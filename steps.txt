@@ -6,3 +6,9 @@ Make the user interface better
 
 Allow to upload multiple pdf documents at the same time, maybe?
 send enter
+llamaparse
+security issues
+For production you need to change the simpledirectory reader
+
+
+make it public

@@ -27,44 +27,59 @@ app.add_middleware(
 )
 
 
-PDF_DIR = Path("data/pdfs")
-INDEX_DIR = Path("data/storage")
+PDF_DIR = Path("data/pdfs") #Storing PDF files
+INDEX_DIR = Path("data/storage")  #Storing indexes for the PDF files
 
 #Ensure directories exist
 
 PDF_DIR.mkdir(parents=True, exist_ok=True)
 INDEX_DIR.mkdir(parents=True, exist_ok=True)
 
+#Define pydantic model for query requests
 class QueryRequest(BaseModel):
     question : str
 
+#Route for uploading PDF files
 @app.post("/upload/")
 async def upload_pdf(file: UploadFile = File(...)):
+    #Save the uploaded file to the PDF directory
     filepath = save_file(file, PDF_DIR)
     print(f"Saved PDF file: {filepath}")
     
+    # Create an index for the uploaded PDF
     index_path = str(INDEX_DIR / f"{file.filename}.json")
     ind.create_index(filepath, index_path)
     print(f"Created index file: {index_path}")
-    
+
+    #Return the filename
     return {"filename": file.filename}
 
+# Route for listing all uploaded files
 @app.get("/files")
 async def list_files():
     try:
+        #Get a list of all files in the pdf directory
         dir_list = os.listdir(PDF_DIR)
         return {"files": dir_list}
     except Exception as e:
         return {"error": str(e)}
 
+#Route for querying a specific PDF file
 @app.post("/query/{filename}")
 async def query_pdf(filename: str, request: QueryRequest):
+    #Construct the path of the index file
     index_path = INDEX_DIR / f"{filename}.json"
+
+    #Check if the index file exists
     if not index_path.exists():
         raise HTTPException(status_code=404, detail="Index not found")
+    
+    #Query the index with the provided question
+    #Return the answer as JSON response
     answer = ind.query_index(str(index_path), request.question)
     return JSONResponse({"answer": str(answer)})
 
+#Route to delete the index and the file
 @app.delete("/delete/{filename}")
 async def delete_pdf(filename: str):
     pdf_path = PDF_DIR / filename
