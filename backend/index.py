@@ -5,7 +5,7 @@ import os
 from llama_index.core import Settings
 from llama_index.llms.openai import OpenAI
 from llama_index.core.llms import ChatMessage, MessageRole
-#These lines were added
+#These lines were added for parsing the documents
 from llama_parse import LlamaParse
 from dotenv import load_dotenv
 import nest_asyncio
@@ -25,12 +25,12 @@ TEXT_QA_SYSTEM_PROMPT = ChatMessage(
     ),
     role=MessageRole.SYSTEM,
 )
-#these lines were added
+#these lines were added for parsing the document
 load_dotenv()                          
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 LLAMA_CLOUD_API_KEY = os.getenv("LLAMA_CLOUD_API_KEY")
 
-#Check if api key is available
+#Check if api key is available (LLAMA_CLOUD_API_KEY for parsing)
 if not OPENAI_API_KEY or not LLAMA_CLOUD_API_KEY:
     raise ValueError("You need an API key for this to work")
 
@@ -55,6 +55,7 @@ def create_index(pdf_path: str, index_dir: str):
     index = VectorStoreIndex.from_documents(
         document,
         storage_context=storage_context,
+        show_progress=True,
         transformations=[SentenceSplitter(chunk_size=1024, chunk_overlap=20)]
     )
     #Storage/persist to disk
@@ -65,9 +66,13 @@ def query_index(index_dir: str, question: str) -> str:
     storage_context = StorageContext.from_defaults(persist_dir=index_dir)
     index = load_index_from_storage(storage_context)
     #Create query engine from the index
-    query_engine = index.as_query_engine(TEXT_QA_SYSTEM_PROMPT=TEXT_QA_SYSTEM_PROMPT)
+    chat_engine = index.as_chat_engine(TEXT_QA_SYSTEM_PROMPT=TEXT_QA_SYSTEM_PROMPT, chat_mode="condense_question")
     #query the index and return the result
-    return query_engine.query(question)
+    return chat_engine.chat(question)
+
+#Chat engine is a high-level interface for having a conversation with your data (multiple back-and-forth instead of a single question & answer). 
+# Think ChatGPT, but augmented with your knowledge base.
+#Conceptually, it is a stateful analogy of a Query Engine. By keeping track of the conversation history, it can answer questions with past context in mind.
 
 def delete_index(index_path: str):
     #Delete the index file if it exists
