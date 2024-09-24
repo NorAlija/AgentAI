@@ -14,11 +14,8 @@ This project is a FastAPI-based web application that allows users to upload, que
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the Project](#running-the-project)
-- [Usage](#usage)
 - [API Documentation](#api-documentation)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+
 
 ## About the Project
 
