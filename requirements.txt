@@ -48,10 +48,6 @@ llama-index-program-openai==0.2.0
 llama-index-question-gen-openai==0.2.0
 llama-index-readers-file==0.2.1
 llama-index-readers-llama-parse==0.3.0
-llama-index-storage-docstore-mongodb==0.2.0
-llama-index-storage-index-store-mongodb==0.3.0
-llama-index-storage-kvstore-mongodb==0.2.0
-llama-index-vector-stores-mongodb==0.2.1
 llama-parse==0.5.5
 marshmallow==3.21.3
 mock==5.1.0
@@ -72,7 +68,6 @@ pillow==10.4.0
 pluggy==1.5.0
 pydantic==2.9.1
 pydantic_core==2.23.3
-pymongo==4.8.0
 pypdf==4.3.1
 PyPDF2==3.0.1
 pytest==8.3.2
