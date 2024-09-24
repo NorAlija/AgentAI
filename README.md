@@ -78,12 +78,20 @@ You will need the following installed to run the project:
 To start the FastAPI server, run the following command:
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn app:app --reload
 ```
 
 The API will be accessible at `http://localhost:8000`.
 
+To start the development server, run: 
 
+```bash
+npm install
+```
+
+```bash
+npm start
+```
 
 ## API Documentation
 
